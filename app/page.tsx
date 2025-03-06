@@ -9,7 +9,12 @@ export default function Home() {
           your stretch goals in life - things you want to do, but they scare
           you, things you think you may not be able to accomplish.
         </p>
-        <p>The concept was created by Jesse Itzler</p>
+        <p>
+          This website is built upon the 'Fuck It List' concept that was created
+          by Jesse Itzler
+        </p>
+        <button>Log in</button>
+        <button>Sign up</button>
       </main>
       <footer></footer>
     </div>
