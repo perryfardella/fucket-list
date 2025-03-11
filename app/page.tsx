@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div>
@@ -13,8 +15,16 @@ export default function Home() {
           This website is built upon the &apos;Fuck It List&apos; concept that
           was created by Jesse Itzler
         </p>
-        <button>Log in</button>
-        <button>Sign up</button>
+        <Link href="/login">
+          <button className="bg-blue-500 text-white py-2 px-4 rounded mr-4 hover:bg-blue-600">
+            Log in
+          </button>
+        </Link>
+        <Link href="/signup">
+          <button className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+            Sign up
+          </button>
+        </Link>
       </main>
       <footer></footer>
     </div>
