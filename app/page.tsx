@@ -183,7 +183,8 @@ export default function Home() {
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row px-4 md:px-6 mx-auto max-w-7xl">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
             © {new Date().getFullYear()} The Fucket List. All rights reserved.
-            Inspired by Jesse Itzler&apos;s concept.
+            Inspired by Jesse Itzler&apos;s concept, but not affiliated with him
+            in any way.
           </p>
           <div className="flex items-center gap-4">
             <Link
