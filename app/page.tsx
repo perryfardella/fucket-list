@@ -19,7 +19,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto max-w-7xl">
           <div className="font-bold text-2xl">The Fucket List</div>
           <nav className="flex items-center gap-4">
             <Link href="/login">
@@ -35,7 +35,7 @@ export default function Home() {
       {/* Hero Section */}
       <main className="flex-1">
         <section className="py-12 md:py-24 lg:py-32 xl:py-40">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
@@ -102,7 +102,7 @@ export default function Home() {
           id="learn-more"
           className="bg-muted/50 py-12 md:py-24 lg:py-32"
         >
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
             <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
               <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">
                 What is the Fucket List?
@@ -154,7 +154,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <section className="py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto max-w-7xl">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
@@ -180,7 +180,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t py-6 md:py-0">
-        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row px-4 md:px-6 mx-auto max-w-7xl">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
             © {new Date().getFullYear()} The Fucket List. All rights reserved.
             Inspired by Jesse Itzler&apos;s concept.
