@@ -128,15 +128,15 @@ export default function ListItems() {
         <div className="text-center py-12 text-muted-foreground">
           {items.length === 0 ? (
             <div className="space-y-2">
-              <p>You haven't added any items to your Fucket List yet.</p>
+              <p>You haven&apos;t added any items to your Fucket List yet.</p>
               <p className="text-sm">
-                What's something challenging you want to accomplish?
+                What&apos;s something challenging you want to accomplish?
               </p>
             </div>
           ) : filter === "active" ? (
-            "You don't have any active items."
+            "You don&apos;t have any active items."
           ) : (
-            "You don't have any completed items."
+            "You don&apos;t have any completed items."
           )}
         </div>
       );

@@ -108,11 +108,12 @@ export default function Home() {
                 What is the Fucket List?
               </h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                The Fucket List is built upon Jesse Itzler's "Fuck It List"
-                concept - a collection of ambitious goals that push you outside
-                your comfort zone. These aren't just bucket list items; they're
-                the challenges that make you say "fuck it, I'm going for it"
-                despite the fear and uncertainty.
+                The Fucket List is built upon Jesse Itzler&apos;s &quot;Fuck It
+                List&quot; concept - a collection of ambitious goals that push
+                you outside your comfort zone. These aren&apos;t just bucket
+                list items; they&apos;re the challenges that make you say
+                &quot;fuck it, I&apos;m going for it&quot; despite the fear and
+                uncertainty.
               </p>
             </div>
 
@@ -182,7 +183,7 @@ export default function Home() {
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
             © {new Date().getFullYear()} The Fucket List. All rights reserved.
-            Inspired by Jesse Itzler's concept.
+            Inspired by Jesse Itzler&apos;s concept.
           </p>
           <div className="flex items-center gap-4">
             <Link
