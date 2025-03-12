@@ -12,8 +12,9 @@ import {
 } from "@/components/ui/card";
 import { LogOut, Mountain } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import ListItems from "../components/ListItems";
+import { Link } from "@/components/ui/link";
 import { useAuth } from "../context/AuthContext";
+import ListItems from "../components/ListItems";
 
 export default function Dashboard() {
   const { user, isLoading, signOut } = useAuth();
@@ -62,10 +63,14 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
         <div className="container max-w-5xl mx-auto px-4 flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            variant="nav"
+            className="flex items-center gap-2 font-bold text-xl hover:text-foreground"
+          >
             <Mountain className="h-6 w-6 text-primary" />
-            <h1 className="text-xl font-bold">The Fucket List</h1>
-          </div>
+            <span>The Fucket List</span>
+          </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground hidden md:inline-block">
               {user.email}

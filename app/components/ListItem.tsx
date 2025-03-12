@@ -150,7 +150,7 @@ export default function ListItem({
               checked={isCompleted}
               onCheckedChange={() => handleToggleComplete()}
               disabled={isUpdating}
-              className="h-5 w-5 rounded-sm"
+              className="h-5 w-5 rounded-sm cursor-pointer transition-all data-[state=checked]:bg-primary"
             />
           )}
         </div>
@@ -173,7 +173,7 @@ export default function ListItem({
                   variant="ghost"
                   onClick={handleUpdateContent}
                   disabled={isUpdating}
-                  className="h-8 w-8"
+                  className="h-8 w-8 hover:bg-primary/10 hover:text-primary"
                 >
                   {isUpdating ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -186,7 +186,7 @@ export default function ListItem({
                   variant="ghost"
                   onClick={cancelEditing}
                   disabled={isUpdating}
-                  className="h-8 w-8"
+                  className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -194,7 +194,7 @@ export default function ListItem({
             </div>
           ) : (
             <div
-              className={`text-base transition-all ${
+              className={`text-base transition-all cursor-pointer hover:text-primary ${
                 isCompleted ? "line-through text-muted-foreground" : ""
               }`}
               onClick={() => !isUpdating && setIsEditing(true)}
@@ -220,7 +220,7 @@ export default function ListItem({
               variant="ghost"
               onClick={() => setIsEditing(true)}
               disabled={isUpdating || isDeleting}
-              className="h-8 w-8 text-muted-foreground hover:text-foreground"
+              className="h-8 w-8 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
             >
               <Edit2 className="h-4 w-4" />
               <span className="sr-only">Edit</span>
@@ -232,7 +232,7 @@ export default function ListItem({
                   size="icon"
                   variant="ghost"
                   disabled={isDeleting}
-                  className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                  className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
                 >
                   {isDeleting ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -251,10 +251,12 @@ export default function ListItem({
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel className="transition-colors hover:bg-secondary">
+                    Cancel
+                  </AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleDelete}
-                    className="bg-destructive text-destructive-foreground"
+                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors"
                   >
                     Delete
                   </AlertDialogAction>

@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Loader2 } from "lucide-react";
+import { Link } from "@/components/ui/link";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -72,12 +73,9 @@ export default function LoginForm() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              <a
-                href="/forgot-password"
-                className="text-sm text-primary hover:underline"
-              >
+              <Link href="/forgot-password" variant="default" size="sm">
                 Forgot password?
-              </a>
+              </Link>
             </div>
             <Input
               id="password"
@@ -103,13 +101,7 @@ export default function LoginForm() {
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <a
-            href="/signup"
-            className="text-primary hover:underline font-medium"
-          >
-            Sign up
-          </a>
+          Don&apos;t have an account? <Link href="/signup">Sign up</Link>
         </p>
       </CardFooter>
     </Card>

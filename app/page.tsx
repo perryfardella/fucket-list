@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/ui/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -22,10 +22,10 @@ export default function Home() {
         <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto max-w-7xl">
           <div className="font-bold text-2xl">The Fucket List</div>
           <nav className="flex items-center gap-4">
-            <Link href="/login">
-              <Button variant="ghost">Log in</Button>
+            <Link href="/login" variant="nav">
+              Log in
             </Link>
-            <Link href="/signup">
+            <Link href="/signup" passHref legacyBehavior>
               <Button>Sign up</Button>
             </Link>
           </nav>
@@ -51,13 +51,13 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/signup">
+                  <Link href="/signup" passHref legacyBehavior>
                     <Button size="lg" className="gap-1.5">
                       Get Started
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <Link href="#learn-more">
+                  <Link href="#learn-more" passHref legacyBehavior>
                     <Button size="lg" variant="outline">
                       Learn More
                     </Button>
@@ -166,7 +166,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/signup">
+                <Link href="/signup" passHref legacyBehavior>
                   <Button size="lg" className="gap-1.5">
                     Create Your List
                     <ArrowRight className="h-4 w-4" />
@@ -187,16 +187,10 @@ export default function Home() {
             in any way.
           </p>
           <div className="flex items-center gap-4">
-            <Link
-              href="/terms"
-              className="text-sm text-muted-foreground hover:underline"
-            >
+            <Link href="/terms" variant="muted" className="hover:underline">
               Terms
             </Link>
-            <Link
-              href="/privacy"
-              className="text-sm text-muted-foreground hover:underline"
-            >
+            <Link href="/privacy" variant="muted" className="hover:underline">
               Privacy
             </Link>
           </div>

@@ -50,13 +50,13 @@ export default function AddListItem({ onItemAdded }: AddListItemProps) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Add a new item to your Fucket List..."
-          className="flex-grow"
+          className="flex-grow transition-all focus-visible:ring-2 focus-visible:ring-primary"
           disabled={isSubmitting}
         />
         <Button
           type="submit"
           disabled={isSubmitting || !content.trim()}
-          className="gap-2"
+          className="gap-2 transition-all"
         >
           {isSubmitting ? (
             <>

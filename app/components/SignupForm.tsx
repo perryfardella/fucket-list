@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle, Loader2 } from "lucide-react";
+import { Link } from "@/components/ui/link";
 
 export default function SignupForm() {
   const [email, setEmail] = useState("");
@@ -114,10 +115,7 @@ export default function SignupForm() {
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-muted-foreground">
-          Already have an account?{" "}
-          <a href="/login" className="text-primary hover:underline font-medium">
-            Sign in
-          </a>
+          Already have an account? <Link href="/login">Sign in</Link>
         </p>
       </CardFooter>
     </Card>

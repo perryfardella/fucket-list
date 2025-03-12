@@ -73,10 +73,23 @@ export default function ListItems() {
         className="w-full"
       >
         <div className="flex items-center justify-between mb-4">
-          <TabsList>
-            <TabsTrigger value="all">All ({items.length})</TabsTrigger>
-            <TabsTrigger value="active">Active ({activeCount})</TabsTrigger>
-            <TabsTrigger value="completed">
+          <TabsList className="transition-all">
+            <TabsTrigger
+              value="all"
+              className="cursor-pointer transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              All ({items.length})
+            </TabsTrigger>
+            <TabsTrigger
+              value="active"
+              className="cursor-pointer transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
+              Active ({activeCount})
+            </TabsTrigger>
+            <TabsTrigger
+              value="completed"
+              className="cursor-pointer transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+            >
               Completed ({completedCount})
             </TabsTrigger>
           </TabsList>
