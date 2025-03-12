@@ -9,8 +9,12 @@ export default function Dashboard() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      router.push("/login");
+    if (!isLoading) {
+      if (!user) {
+        router.push("/login");
+      } else if (user.email && !user.email_confirmed_at) {
+        router.push(`/verify-email?email=${encodeURIComponent(user.email)}`);
+      }
     }
   }, [user, isLoading, router]);
 
@@ -18,7 +22,7 @@ export default function Dashboard() {
     return <div className="text-center p-8">Loading...</div>;
   }
 
-  if (!user) {
+  if (!user || (user.email && !user.email_confirmed_at)) {
     return null; // Will redirect in the useEffect
   }
 

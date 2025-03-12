@@ -54,16 +54,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
     });
 
     if (error) {
       throw error;
     }
 
-    router.push("/dashboard");
+    if (data.user && !data.user.email_confirmed_at) {
+      router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+    } else {
+      router.push("/dashboard");
+    }
   };
 
   const signIn = async (email: string, password: string) => {
