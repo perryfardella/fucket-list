@@ -1,9 +1,19 @@
 "use client";
 
-import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { LogOut, Mountain } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import ListItems from "../components/ListItems";
+import { useAuth } from "../context/AuthContext";
 
 export default function Dashboard() {
   const { user, isLoading, signOut } = useAuth();
@@ -20,7 +30,28 @@ export default function Dashboard() {
   }, [user, isLoading, router]);
 
   if (isLoading) {
-    return <div className="text-center p-8">Loading...</div>;
+    return (
+      <div className="container max-w-5xl mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-6">
+          <Skeleton className="h-10 w-48" />
+          <Skeleton className="h-10 w-24" />
+        </div>
+        <Card>
+          <CardHeader>
+            <Skeleton className="h-6 w-32 mb-2" />
+            <Skeleton className="h-4 w-full" />
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-20 w-full" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   if (!user || (user.email && !user.email_confirmed_at)) {
@@ -28,30 +59,57 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Your Fucket List</h1>
-        <button
-          onClick={() => signOut()}
-          className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
-        >
-          Sign Out
-        </button>
-      </div>
+    <div className="min-h-screen bg-background">
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
+        <div className="container max-w-5xl mx-auto px-4 flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Mountain className="h-6 w-6 text-primary" />
+            <h1 className="text-xl font-bold">The Fucket List</h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-muted-foreground hidden md:inline-block">
+              {user.email}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => signOut()}
+              className="gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Sign Out</span>
+            </Button>
+          </div>
+        </div>
+      </header>
 
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <p className="mb-4">Welcome, {user.email}!</p>
-        <p>
-          This is your Fucket List - a place to track all your stretch goals in
-          life. Add items that scare you, things you think you may not be able
-          to accomplish, and check them off as you conquer them!
-        </p>
-      </div>
+      <main className="container max-w-5xl mx-auto px-4 py-8">
+        <Card className="mb-8 border-0 shadow-md bg-gradient-to-br from-primary/10 to-background">
+          <CardHeader>
+            <CardTitle className="text-2xl">Your Fucket List</CardTitle>
+            <CardDescription>
+              Track your most ambitious goals - the ones that scare you but
+              would transform your life if accomplished.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">
+              Add items that push you outside your comfort zone, things you
+              think you may not be able to accomplish, and check them off as you
+              conquer them!
+            </p>
+          </CardContent>
+        </Card>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-4">Your List</h2>
-        <ListItems />
-      </div>
+        <Card className="border-0 shadow-md">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-xl">Your List</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ListItems />
+          </CardContent>
+        </Card>
+      </main>
     </div>
   );
 }

@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
-import { ListItem as ListItemType } from "../types";
+import type { ListItem as ListItemType } from "../types";
 import ListItem from "./ListItem";
 import AddListItem from "./AddListItem";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ListItems() {
   const [items, setItems] = useState<ListItemType[]>([]);
@@ -54,67 +58,101 @@ export default function ListItems() {
   const activeCount = items.filter((item) => !item.is_completed).length;
   const completedCount = items.filter((item) => item.is_completed).length;
 
+  const handleTabChange = (value: string) => {
+    setFilter(value as "all" | "active" | "completed");
+  };
+
   return (
     <div>
       <AddListItem onItemAdded={fetchItems} />
 
-      <div className="mb-4 flex justify-between items-center">
-        <div className="text-sm text-gray-500">
-          {activeCount} active, {completedCount} completed
+      <Tabs
+        defaultValue="all"
+        value={filter}
+        onValueChange={handleTabChange}
+        className="w-full"
+      >
+        <div className="flex items-center justify-between mb-4">
+          <TabsList>
+            <TabsTrigger value="all">All ({items.length})</TabsTrigger>
+            <TabsTrigger value="active">Active ({activeCount})</TabsTrigger>
+            <TabsTrigger value="completed">
+              Completed ({completedCount})
+            </TabsTrigger>
+          </TabsList>
         </div>
 
-        <div className="flex space-x-2">
-          <button
-            onClick={() => setFilter("all")}
-            className={`px-3 py-1 text-sm rounded ${
-              filter === "all" ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilter("active")}
-            className={`px-3 py-1 text-sm rounded ${
-              filter === "active" ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
-          >
-            Active
-          </button>
-          <button
-            onClick={() => setFilter("completed")}
-            className={`px-3 py-1 text-sm rounded ${
-              filter === "completed" ? "bg-blue-500 text-white" : "bg-gray-200"
-            }`}
-          >
-            Completed
-          </button>
-        </div>
-      </div>
-
-      {isLoading ? (
-        <div className="text-center p-8">Loading your list items...</div>
-      ) : error ? (
-        <div className="text-center p-8 text-red-500">{error}</div>
-      ) : filteredItems.length === 0 ? (
-        <div className="text-center p-8 text-gray-500">
-          {items.length === 0
-            ? "You haven't added any items to your Fucket List yet."
-            : filter === "active"
-            ? "You don't have any active items."
-            : "You don't have any completed items."}
-        </div>
-      ) : (
-        <div>
-          {filteredItems.map((item) => (
-            <ListItem
-              key={item.id}
-              item={item}
-              onItemUpdated={fetchItems}
-              onItemDeleted={fetchItems}
-            />
-          ))}
-        </div>
-      )}
+        <TabsContent value="all" className="mt-0">
+          {renderItems()}
+        </TabsContent>
+        <TabsContent value="active" className="mt-0">
+          {renderItems()}
+        </TabsContent>
+        <TabsContent value="completed" className="mt-0">
+          {renderItems()}
+        </TabsContent>
+      </Tabs>
     </div>
   );
+
+  function renderItems() {
+    if (isLoading) {
+      return (
+        <div className="space-y-3">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="p-4 border rounded-lg">
+              <div className="flex items-start gap-3">
+                <Skeleton className="h-5 w-5 rounded-sm" />
+                <div className="flex-grow">
+                  <Skeleton className="h-5 w-full max-w-[80%] mb-2" />
+                  <Skeleton className="h-3 w-32" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      );
+    }
+
+    if (filteredItems.length === 0) {
+      return (
+        <div className="text-center py-12 text-muted-foreground">
+          {items.length === 0 ? (
+            <div className="space-y-2">
+              <p>You haven't added any items to your Fucket List yet.</p>
+              <p className="text-sm">
+                What's something challenging you want to accomplish?
+              </p>
+            </div>
+          ) : filter === "active" ? (
+            "You don't have any active items."
+          ) : (
+            "You don't have any completed items."
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        {filteredItems.map((item) => (
+          <ListItem
+            key={item.id}
+            item={item}
+            onItemUpdated={fetchItems}
+            onItemDeleted={fetchItems}
+          />
+        ))}
+      </div>
+    );
+  }
 }

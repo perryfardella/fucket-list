@@ -1,8 +1,13 @@
 "use client";
 
+import type React from "react";
+
 import { useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Loader2, Plus } from "lucide-react";
 
 type AddListItemProps = {
   onItemAdded: () => void;
@@ -39,22 +44,32 @@ export default function AddListItem({ onItemAdded }: AddListItemProps) {
 
   return (
     <form onSubmit={handleSubmit} className="mb-6">
-      <div className="flex items-center">
-        <input
+      <div className="flex items-center gap-2">
+        <Input
           type="text"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Add a new item to your Fucket List..."
-          className="flex-grow p-2 border rounded-l focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-grow"
           disabled={isSubmitting}
         />
-        <button
+        <Button
           type="submit"
           disabled={isSubmitting || !content.trim()}
-          className="bg-blue-500 text-white p-2 rounded-r hover:bg-blue-600 disabled:bg-blue-300"
+          className="gap-2"
         >
-          {isSubmitting ? "Adding..." : "Add"}
-        </button>
+          {isSubmitting ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Adding...
+            </>
+          ) : (
+            <>
+              <Plus className="h-4 w-4" />
+              Add
+            </>
+          )}
+        </Button>
       </div>
     </form>
   );
