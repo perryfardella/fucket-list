@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../lib/supabase";
 
+// TODO: Update email format Supabase sends to make it more personalised.
+
 export default function VerifyEmail() {
   const [email, setEmail] = useState<string | null>(null);
   const [isResending, setIsResending] = useState(false);
