@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "../lib/supabase";
 
 // TODO: Update email format Supabase sends to make it more personalised.
 
-export default function VerifyEmail() {
+function VerifyEmailContent() {
   const [email, setEmail] = useState<string | null>(null);
   const [isResending, setIsResending] = useState(false);
   const [resendSuccess, setResendSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -54,7 +53,7 @@ export default function VerifyEmail() {
         <h2 className="text-2xl font-bold mb-6">Verify Your Email</h2>
 
         <div className="mb-6 p-4 bg-blue-50 text-blue-700 rounded">
-          <p className="mb-2">We've sent a verification email to:</p>
+          <p className="mb-2">We&apos;ve sent a verification email to:</p>
           <p className="font-bold">{email || "your email address"}</p>
         </div>
 
@@ -64,7 +63,7 @@ export default function VerifyEmail() {
             your registration.
           </p>
           <p className="text-sm text-gray-600">
-            If you don't see the email, check your spam folder.
+            If you don&apos;t see the email, check your spam folder.
           </p>
         </div>
 
@@ -97,5 +96,13 @@ export default function VerifyEmail() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyEmail() {
+  return (
+    <Suspense fallback={<div className="text-center p-8">Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
