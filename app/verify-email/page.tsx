@@ -73,13 +73,14 @@ function VerifyEmailContent() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Alert className="bg-primary/10 border-primary/20 text-foreground">
-            <div className="text-center w-full">
-              <p className="mb-1 text-sm">
-                We&apos;ve sent a verification email to:
-              </p>
-              <p className="font-medium">{email || "your email address"}</p>
-            </div>
+          <Alert
+            variant="centered"
+            className="bg-primary/10 border-primary/20 text-foreground"
+          >
+            <p className="mb-1 text-sm">
+              We&apos;ve sent a verification email to:
+            </p>
+            <p className="font-medium">{email || "your email address"}</p>
           </Alert>
 
           <div className="text-sm text-muted-foreground space-y-2">
