@@ -2,10 +2,19 @@
 
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/components/ui/link";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertCircle, CheckCircle, Loader2, Mail } from "lucide-react";
 import { supabase } from "../lib/supabase";
-
-// TODO: Update email format Supabase sends to make it more personalised.
 
 function VerifyEmailContent() {
   const [email, setEmail] = useState<string | null>(null);
@@ -48,60 +57,96 @@ function VerifyEmailContent() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-6">Verify Your Email</h2>
-
-        <div className="mb-6 p-4 bg-blue-50 text-blue-700 rounded">
-          <p className="mb-2">We&apos;ve sent a verification email to:</p>
-          <p className="font-bold">{email || "your email address"}</p>
-        </div>
-
-        <div className="mb-6">
-          <p className="mb-2">
-            Please check your inbox and click the verification link to complete
-            your registration.
-          </p>
-          <p className="text-sm text-gray-600">
-            If you don&apos;t see the email, check your spam folder.
-          </p>
-        </div>
-
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
-            {error}
+    <div className="container max-w-5xl mx-auto px-4 py-12 flex items-center justify-center min-h-[80vh]">
+      <Card className="w-full max-w-md mx-auto shadow-lg border-0">
+        <CardHeader className="space-y-1">
+          <div className="flex justify-center mb-2">
+            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <Mail className="h-6 w-6 text-primary" />
+            </div>
           </div>
-        )}
+          <CardTitle className="text-2xl font-bold text-center">
+            Verify Your Email
+          </CardTitle>
+          <CardDescription className="text-center">
+            We&apos;ve sent a verification email to complete your registration
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <Alert className="bg-primary/10 border-primary/20 text-foreground">
+            <div className="text-center w-full">
+              <p className="mb-1 text-sm">
+                We&apos;ve sent a verification email to:
+              </p>
+              <p className="font-medium">{email || "your email address"}</p>
+            </div>
+          </Alert>
 
-        {resendSuccess && (
-          <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
-            Verification email resent successfully!
+          <div className="text-sm text-muted-foreground space-y-2">
+            <p>
+              Please check your inbox and click the verification link to
+              complete your registration.
+            </p>
+            <p className="text-xs">
+              If you don&apos;t see the email, check your spam folder.
+            </p>
           </div>
-        )}
 
-        <div className="flex flex-col space-y-4">
-          <button
+          {error && (
+            <Alert variant="destructive" className="animate-in fade-in-50">
+              <AlertCircle className="h-4 w-4" />
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          {resendSuccess && (
+            <Alert className="bg-success/10 border-success/20 text-success">
+              <CheckCircle className="h-4 w-4" />
+              <AlertDescription>
+                Verification email resent successfully!
+              </AlertDescription>
+            </Alert>
+          )}
+        </CardContent>
+        <CardFooter className="flex flex-col space-y-3">
+          <Button
             onClick={handleResendVerification}
             disabled={isResending}
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:bg-blue-300"
+            className="w-full"
           >
-            {isResending ? "Resending..." : "Resend Verification Email"}
-          </button>
+            {isResending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Resending...
+              </>
+            ) : (
+              "Resend Verification Email"
+            )}
+          </Button>
 
-          <Link href="/login">
-            <button className="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300">
+          <Link href="/login" passHref legacyBehavior>
+            <Button variant="outline" className="w-full">
               Back to Login
-            </button>
+            </Button>
           </Link>
-        </div>
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
 
 export default function VerifyEmail() {
   return (
-    <Suspense fallback={<div className="text-center p-8">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="container flex items-center justify-center min-h-[80vh]">
+          <div className="text-center space-y-4">
+            <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      }
+    >
       <VerifyEmailContent />
     </Suspense>
   );
