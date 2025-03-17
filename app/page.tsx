@@ -199,14 +199,14 @@ export default function Home() {
             Inspired by Jesse Itzler&apos;s concept, but not affiliated with him
             in any way.
           </p>
-          <div className="flex items-center gap-4">
+          {/* <div className="flex items-center gap-4">
             <Link href="/terms" variant="muted" className="hover:underline">
               Terms
             </Link>
             <Link href="/privacy" variant="muted" className="hover:underline">
               Privacy
             </Link>
-          </div>
+          </div> */}
         </div>
       </footer>
     </div>
