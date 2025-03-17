@@ -50,11 +50,9 @@ export default function SignupForm() {
   return (
     <Card className="w-full max-w-md mx-auto shadow-lg border-0">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
-          Create an account
-        </CardTitle>
+        <CardTitle className="text-2xl text-center">Create account</CardTitle>
         <CardDescription className="text-center">
-          Enter your email and password to sign up
+          Enter your details to get started
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

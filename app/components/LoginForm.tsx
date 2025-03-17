@@ -43,11 +43,9 @@ export default function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto shadow-lg border-0">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold text-center">
-          Welcome back
-        </CardTitle>
+        <CardTitle className="text-2xl text-center">Welcome back</CardTitle>
         <CardDescription className="text-center">
-          Enter your credentials to sign in to your account
+          Enter your credentials to continue
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">

@@ -21,7 +21,16 @@ export default function Home() {
       {/* Navigation */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between px-4 md:px-6 mx-auto max-w-7xl">
-          <div className="font-bold text-2xl">The Fucket List</div>
+          <div className="">
+            <Link
+              href="/"
+              className="flex items-center gap-2 font-bold text-xl"
+              variant="nav"
+            >
+              <Mountain className="h-6 w-6 text-primary" />
+              <span>The Fucket List</span>
+            </Link>
+          </div>
           <nav className="flex items-center gap-4">
             <Link href="/login" variant="nav">
               Log in
