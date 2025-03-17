@@ -13,6 +13,7 @@ import {
   Target,
   Trophy,
 } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -67,12 +68,15 @@ export default function Home() {
               <div className="flex items-center justify-center">
                 <div className="relative h-[350px] w-full overflow-hidden rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 p-2">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Mountain
-                      className="h-40 w-40 text-primary/40"
-                      strokeWidth={1}
+                    <Image
+                      src="/images/danka-peter-L0o1RfQuPUY-unsplash.jpg"
+                      alt="Person standing on mountain peak overlooking mountain range"
+                      fill
+                      className="object-cover opacity-70"
+                      priority
                     />
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-background/95 backdrop-blur p-4 shadow-lg">
+                  <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-background/95 backdrop-blur p-4 shadow-lg opacity-80">
                     <div className="space-y-2">
                       <h3 className="font-semibold">My Fucket List</h3>
                       <ul className="space-y-2">
